@@ -1,0 +1,18 @@
+.itemImg {
+    height: 125px;
+    width: 125px;
+}
+.flexContainer {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+.first {
+    flex-grow: 3;
+}
+.second {
+    flex-grow: 5;
+}
+.third {
+    flex-grow: 2;
+}

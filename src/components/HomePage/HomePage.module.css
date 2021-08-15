@@ -1,0 +1,43 @@
+.mainContent{
+    padding-top: 20px;
+    height: 928px;
+    background: #E5E5E5;
+}
+.blur{
+    height: 928px;
+    padding-top: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    filter: blur(4px);
+    -webkit-filter: blur(3px);
+}
+.blockCategory{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 61px;
+    background: #FFFFFF;
+    margin-right: 21.63%;
+    margin-left: 21.63%;
+}
+.cardList {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap:wrap;
+    margin-right: 21%;
+    margin-left: 21%;
+}
+.inputSearch{
+    width: 290px;
+}
+.selectCategory{
+    width: 290px;
+}
+.selectSort{
+    width: 180px;
+}
+.paginationButton{
+    margin-top: 50px;
+}

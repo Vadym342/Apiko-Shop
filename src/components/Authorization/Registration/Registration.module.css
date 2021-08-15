@@ -1,0 +1,26 @@
+.regblock {
+    position: absolute;
+    left: 35.28%;
+    right: 35.21%;
+    top: 20.37%;
+    bottom: 32.5%;
+    width: 425px;
+    height: 44%;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+.regblock1 {
+    width: 425px;
+    height: 6%;
+    margin-top: -15px;
+    position: absolute;
+    left: 35.21%;
+    right: 35.28%;
+    top: 68.89%;
+    bottom: 24.07%;
+    background: #ffffff;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}

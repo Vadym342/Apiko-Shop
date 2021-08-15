@@ -1,0 +1,21 @@
+.buttonFill {
+    width: 100%;
+    background: #fd7114;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    height: 36px;
+}
+.buttonFill:hover {
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    border-radius: 5px;
+}
+.buttonActive {
+    width: 100%;
+    height: 36px;
+    color: #fd7114;
+    background-color: white;
+    border: 2px solid #fd7114;
+    border-radius: 4px;
+}

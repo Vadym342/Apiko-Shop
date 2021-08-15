@@ -1,0 +1,11 @@
+.pos {
+    position: absolute;
+    left: 35.28%;
+    right: 35.21%;
+    top: 25.28%;
+    bottom: 37.96%;
+    background: #ffffff;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 10;
+}

@@ -1,0 +1,55 @@
+.pos {
+    position: absolute;
+    top: 75px;
+    right: 13%;
+    border-radius: 4px;
+    width: 250px;
+    height: 160px;
+    background-color: white;
+    color: black;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+}
+.h4 {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 19px;
+    letter-spacing: 0.4px;
+}
+.title {
+    margin-top: 17px;
+    margin-left: 16px;
+    width: 234px;
+    height: 19px;
+    color: #373738;
+}
+.email {
+    margin-top: 1px;
+    margin-left: 16px;
+    width: 234px;
+    height: 19px;
+    color: #707070;
+}
+.hr {
+    border: none;
+    height: 1px;
+    color: #e4e4e4;
+    background-color: #e4e4e4;
+    margin-top: 17px;
+}
+.settings {
+    margin-top: 11px;
+    margin-left: 16px;
+    color: #373738;
+    text-decoration: 'none'
+}
+.h3 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 26px;
+}
+.logout{
+    margin-top: 14px;
+    margin-left: 16px;
+    color: #F44336;
+}

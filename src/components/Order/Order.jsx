@@ -46,10 +46,10 @@ const Order = () => {
     return (
         <div className={st.cartBlock}>
             <div className={st.mainContent}>
-                <div>
-                    <h3>
+                <div className={st.titleBlock}>
+                    <p>
                         My cart
-                    </h3>
+                    </p>
                 </div>
                 <div className={st.flexContainer}>
                     <div className={st.first}>
@@ -80,7 +80,7 @@ const Order = () => {
                                     <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone" />
                                 </div>
                                 <div>
-                                    <select defaultValue="Choose Country" onChange={e => setCountry(e.target.value)}>
+                                    <select className={st.selectCountry} defaultValue="Choose Country" onChange={e => setCountry(e.target.value)}>
                                         {
                                             countries.map((country, index) => (
                                                 <option key={country} value={country}>{country}</option>

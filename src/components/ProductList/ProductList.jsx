@@ -26,7 +26,7 @@ const ProductListRender = (props) => {
             dispatch(setIsGuestPopUp(true));
         }
     }
-    const title = props.title.length > 50 ? `${props.title.substr(0, 50)}...` : props.title;
+    const title = props.title.length > 40 ? `${props.title.substr(0, 40)}...` : props.title;
     return (
         <div className={st.card}>
             <span className={st.buttons} onClick={() => { props.openSingleItem(props.item) }}>
@@ -35,16 +35,16 @@ const ProductListRender = (props) => {
                 </div> */}
                 <img className={st.img} src={props.picture} alt="Shoes" />
             </span>
-            <div className={st.button}>
+            <div className={st.titleBlock}>
                 <h4 className={st.title}>{title} {substr ? "..." : ""}</h4>
             </div>
-            <div className={st.button}>
+            <div className={st.priceBlock}>
                 <div>
                     <h4>${props.price}</h4>
                 </div>
-                <div>
-                    <button className={st.buttonHeart} onClick={() => handleSetFavorite()}>
-                        <BsHeart color={toggleHeart ? "red" : ""} />
+                <div className={st.blockHeart}>
+                    <button className={st.buttonHeart} disabled onClick={() => handleSetFavorite()}>
+                        <BsHeart className={st.heartIcon} color={toggleHeart ? "red" : ""} />
                     </button>
                 </div>
             </div>

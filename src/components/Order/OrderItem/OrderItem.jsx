@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartArraySelector, completedOrderArraySelector, deleteCompletedOrderArray, setCompletedOrderArray } from '../../../store';
 import st from './OrderItem.module.css';
-
+import dump from '../../../Icons/dump.svg';
 const OrderItem = (props) => {
     const dispatch = useDispatch();
 
@@ -77,20 +77,31 @@ const OrderItem = (props) => {
                     <img className={st.itemImg} src={props.item.picture} alt="product" />
                 </div>
                 <div className={st.second}>
-                    <div>
-                        <h4>
+                    <div className={st.titleBlock}>
+                        <p>
                             {title}
-                        </h4>
+                        </p>
                     </div>
-                    <div>
-                        <button>Delete</button>
-
-                        <button onClick={() => minItem()}>-</button> {count}
-                        <button onClick={() => plusItem()}>+</button>
+                    <div className={st.buttonsBlock}>
+                        <div className={st.dumpIcon}>
+                            <img src={dump} alt="dump" />
+                        </div>
+                        <div>
+                            <button className={st.buttonsCount} onClick={() => minItem()}>-</button>
+                        </div>
+                        <div className={st.countNum}>
+                            <p>{count}</p>
+                        </div>
+                        <div>
+                            <button className={st.buttonsCount} onClick={() => plusItem()}>+</button>
+                        </div>
                     </div>
                 </div>
                 <div className={st.third}>
-                    {price}
+                    <div className={st.priceBlock}>
+                        Price:
+                        <p>{price}</p>
+                    </div>
                 </div>
             </div>
         </div>

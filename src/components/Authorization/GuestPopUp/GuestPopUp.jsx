@@ -1,10 +1,13 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModalSelector, isRegFormOpenSelector, setCloseModal, setIsGuestPopUp, setIsLoginFormOpen, setIsRegFormOpen } from '../../../store';
+import { closeModalSelector, isRegFormOpenSelector, setCloseModal, setIsGuestPopUp, setIsRegFormOpen } from '../../../store';
 import Registration from '../Registration/Registration';
 import Modal from '../../Modal/Modal';
 import Login from '../Login/Login';
 import st from './GuestPopUp.module.css';
+import dagger from '../../../Icons/dagger.svg';
+import buttonSt from '../../../globalStyle/buttons.module.css';
+
 
 const GuestPopUp = () => {
     const dispatch = useDispatch();
@@ -14,7 +17,7 @@ const GuestPopUp = () => {
         dispatch(setCloseModal(true));
         dispatch(setIsRegFormOpen(bool));
     }
-    const handleRegistration = (bool) =>{
+    const handleRegistration = (bool) => {
         dispatch(setIsGuestPopUp(false))
         dispatch(setCloseModal(true));
         dispatch(setIsRegFormOpen(bool));
@@ -22,26 +25,34 @@ const GuestPopUp = () => {
     const isRegFormOpen = useSelector(isRegFormOpenSelector);
     return (
         <div className={st.pos}>
-            <div onClick={() => dispatch(setIsGuestPopUp(false))}>
-                <h1>X</h1>
+            <div className={st.close} >
+                <img onClick={() => dispatch(setIsGuestPopUp(false))} src={dagger} alt="close" />
             </div>
-            <div>
-                <h3>To continue please register or log in</h3>
+            <div className={st.blockButtons}>
+                <div className={st.title}>
+                    <h3>To continue please register or log in</h3>
+                </div>
+                <div className={st.button}>
+                    <button className={buttonSt.buttonFill} onClick={() => handleLogIn(false)}>
+                        Continue to sign in
+                    </button>
+                </div>
+                <div className={st.button}>
+                    <button className={buttonSt.buttonFill} onClick={() => handleRegistration(true)}>
+                        Continue to register
+                    </button>
+                </div>
+                <div className={st.button}>
+                    <button className={buttonSt.buttonActive} onClick={() => dispatch(setIsGuestPopUp(false))}>
+                        Continue as guest
+                    </button>
+                </div>
+                <Modal isOpen={isOpen}>
+                    {
+                        isRegFormOpen ? <Registration /> : <Login />
+                    }
+                </Modal>
             </div>
-            <button onClick={() => handleLogIn(false)}>
-                Continue to sign in
-            </button>
-            <button  onClick={() => handleRegistration(true)}>
-                Continue to register
-            </button>
-            <button onClick={() => dispatch(setIsGuestPopUp(false))}>
-                Continue as guest
-            </button>
-            <Modal isOpen={isOpen}>
-                {
-                    isRegFormOpen ? <Registration/> : <Login />
-                }
-            </Modal>
         </div>
     )
 }

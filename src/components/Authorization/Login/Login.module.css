@@ -24,3 +24,42 @@
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
 }
+.close {
+    margin-top: 20px;
+    margin-right: 20px;
+    float: right;
+}
+.titleBlock{
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 35px;
+    text-align: center;
+}
+.errorMessage{
+    color: red;
+    font-weight: 300;
+}
+.blockInputs{
+    margin-top: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.buttonBlock{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+.input{
+    margin-top: 20px;
+}
+.textBlock{
+    margin-top: 3%;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+}
+.textButton{
+    border: none;
+    color: #FD7114;
+    background-color: white;
+}

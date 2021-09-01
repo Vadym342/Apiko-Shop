@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { cartArraySelector, cartBubbleSelector, deleteFavoriteById, isGuestPopUpSelector, isNotificationPopUpSelector, postFavoriteById, setCartArray, setCartBubble, setIsGuestPopUp, setIsNotificationPopUp, setNotificationBoldMessage, setNotificationMessage, userSelector } from '../../../store';
+import {
+    cartArraySelector, cartBubbleSelector, deleteFavoriteById,
+    isGuestPopUpSelector, postFavoriteById, setCartArray,setCartBubble, setIsGuestPopUp, 
+    setIsNotificationPopUp, setNotificationBoldMessage, setNotificationMessage, userSelector
+} from '../../../store';
 import GuestPopUp from '../../Authorization/GuestPopUp/GuestPopUp';
 import dagger from '../../../Icons/dagger.svg';
 import st from './ProductDesc.module.css';
 import buttonSt from '../../../globalStyle/buttons.module.css';
+
 
 const ProductDesc = (props) => {
     const dispatch = useDispatch();
@@ -15,7 +20,6 @@ const ProductDesc = (props) => {
     const [count, setCount] = useState(1);
     const [total, setTotal] = useState(tmpPrice);
     const [isFavorite, setIsFavorite] = useState(props.item.favorite);
-    const [isAddedToCart, setIsAddedToCart] = useState(false);
     const isGuestPopUp = useSelector(isGuestPopUpSelector);
     const cartList = useSelector(cartArraySelector);
     const cartBubble = useSelector(cartBubbleSelector);
@@ -38,7 +42,7 @@ const ProductDesc = (props) => {
         dispatch(deleteFavoriteById(props.item.id));
     }
     const handleAddToFavorite = () => {
-        if (user === null) {
+        if (!user) {
             dispatch(setIsGuestPopUp(true));
         } else {
             setIsFavorite(true);
@@ -48,52 +52,29 @@ const ProductDesc = (props) => {
 
     const handleAddtoCart = () => {
         props.closePopUp();
-        setIsAddedToCart(true);
-        dispatch(setCartBubble(cartBubble + 1));
         dispatch(setIsNotificationPopUp(true));
+        dispatch(setCartBubble(cartBubble + 1));
         dispatch(setCartArray({
             id: props.item.id,
             count: count,
             totalPrice: total,
         }));
-        dispatch(setNotificationBoldMessage(props.item.title.substr(0, 20)));
-        dispatch(setNotificationMessage(" is successfully added to cart"));
-        // if (user !== null) {
-        //     if (user.account.country === null) {
 
-        //     } else {
-        //         dispatch(postOrder({
-        //             items: [
-        //                 {
-        //                     "productId": props.item.id,
-        //                     "quantity": count
-        //                 }
-        //             ],
-        //             shipment: {
-        //                 fullName: user.account.fullName,
-        //                 phone: user.account.phone,
-        //                 country: user.account.country,
-        //                 city: user.account.city,
-        //                 address: user.account.address
-        //             }
-        //         }));
-        //     }
-        // }
+        dispatch(setNotificationBoldMessage(props.item.title.substr(0, 20)));
+        dispatch(setNotificationMessage("is successfully added to cart"));
     }
     const handleBuy = () => {
-        if (cartList.length === 0) {
-            dispatch(setCartArray(props.item.id));
-            history.push("/cart");
-        } else {
-            cartList.forEach(element => {
-                if (element === props.item.id) {
-                    history.push("/cart");
-                } else {
-                    dispatch(setCartArray(props.item.id));
-                    history.push("/cart");
-                }
-            })
-        }
+        props.closePopUp();
+        dispatch(setIsNotificationPopUp(true));
+        dispatch(setCartBubble(cartBubble + 1));
+        dispatch(setNotificationBoldMessage(props.item.title.substr(0, 20)));
+        dispatch(setNotificationMessage(" is successfully added to cart"));
+        dispatch(setCartArray({
+            id: props.item.id,
+            count: count,
+            totalPrice: total,
+        }));
+        history.push("/cart");
     }
 
     return (

@@ -2,15 +2,20 @@ import './App.css';
 import Navbar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer';
 import HomePage from './components/HomePage/HomePage';
-import { Route } from 'react-router-dom';
+import { Route} from 'react-router-dom';
 import Loader from './components/Loader/Loader';
 import EditProfile from './components/Profile/EditProfile/EditProfile';
 import Favorites from './components/Profile/Favorites/Favorites';
 import OrderHistory from './components/Profile/OrderHistory/OrderHistory';
 import Order from './components/Order/Order';
+import ProtectedRoute from './components/ProtectedRoute';
+import NotificationPopUp from './components/NotificationPopUp/NotificationPopUp';
+import { useSelector } from 'react-redux';
+import { isNotificationPopUpSelector } from './store';
 
 
 function App() {
+  const isNotificationPopUp = useSelector(isNotificationPopUpSelector);
   return (
     <div>
       <Navbar />
@@ -20,31 +25,35 @@ function App() {
         } />
       </div>
       <div>
-        <Route path="/cart" render={() =>
-          <Order />
-        }
+        <ProtectedRoute exact path="/cart"
+          component={Order}
         />
       </div>
       <div>
-        <Route path="/profile/settings" render={() =>
-          <EditProfile />
-        } />
+        <ProtectedRoute exact path="/profile/settings"
+          component={EditProfile}
+        />
       </div>
       <div>
-        <Route path="/profile/favorite" render={() =>
-          <Favorites />
-        } />
+        <ProtectedRoute path="/profile/favorite"
+          component={Favorites}
+        />
       </div>
       <div>
-        <Route path="/profile/order/history" render={() =>
-          <OrderHistory />
-        } />
+        <ProtectedRoute path="/profile/order/history"
+          component={OrderHistory
+          } />
       </div>
-
       <div>
         <Loader />
       </div>
-
+      <div>
+        <Route path="*" render={()=>""} />
+      </div>
+      {
+        isNotificationPopUp ? <NotificationPopUp
+        /> : ""
+      }
       <Footer />
     </div>
   );

@@ -1,5 +1,7 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer } from '@reduxjs/toolkit';
 import {
+    changeCompletedOrderArray,
+    deleteCartarray,
     deleteCompletedOrderArray,
     setCartArray, setCartBubble, setCategories, setCloseModal, setCompletedOrderArray, setCountries,
     setFavoriteList, setGlobalErrorMessage, setIsGuestPopUp, setIsLoader, setIsLoginFormOpen,
@@ -7,9 +9,11 @@ import {
     setIsRegFormOpen, setLogout, setNotFound, setNotFoundCategory,
     setNotificationBoldMessage,
     setNotificationMessage,
+    setOffset,
+    setOrderHistory,
     setOrderList, setProductList, setUser
-} from "./action";
-import { initialState } from "./initialState";
+} from './action';
+import { initialState } from './initialState';
 
 export const shopReducer = createReducer(initialState, {
     [setProductList]: (state, action) => {
@@ -63,10 +67,13 @@ export const shopReducer = createReducer(initialState, {
     [setCartArray]: (state, action) => {
         state.cartArray.push(action.payload);
     },
+    [deleteCartarray]:(state,action) =>{
+        const filtered = state.cartArray.filter(el=>el.id!==action.payload);
+        state.cartArray=filtered;
+    },
     [setCountries]: (state, action) => {
         state.countries = action.payload;
     },
-
     [setCartBubble]: (state, action) => {
         state.cartBubble = action.payload;
     },
@@ -77,12 +84,22 @@ export const shopReducer = createReducer(initialState, {
         state.completedOrderArray.push(action.payload);
     },
     [deleteCompletedOrderArray]: (state, action) => {
-        const filtered = state.completedOrderArray.filter(el => {
-            // console.log(` paylaod ${action.payload}`)
-            // console.log(` el id ${el.product.id}`)
-            return el.product.id === action.payload
-        });
+        const filtered = state.completedOrderArray.filter(el => el.product.id !== action.payload);
         state.completedOrderArray = filtered;
+    },
+    [changeCompletedOrderArray]: (state, action) => {
+        state.completedOrderArray.forEach(el => {
+            if (el.product.id = action.payload.id) {
+                el.quantity = action.payload.quantity;
+                el.orderedPrice = action.payload.orderedPrice;
+            }
+        })
+    },
+    [setOffset] : (state, action) =>{
+            state.offset=action.payload;
+    },
+    [setOrderHistory]:(state,action)=>{
+        state.orderHistory=action.payload;
     }
 
 })

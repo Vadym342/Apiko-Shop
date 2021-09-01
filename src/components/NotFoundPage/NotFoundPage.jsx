@@ -1,5 +1,3 @@
-
-
 const NotFoundPage =()=>{
     return(
         <div>

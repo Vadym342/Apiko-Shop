@@ -1,7 +1,10 @@
 import st from './Login.module.css'
-import { useDispatch } from 'react-redux';
-import { loginUser, setCloseModal, setIsRegFormOpen } from '../../../store';
+import { useDispatch} from 'react-redux';
+import { loginUser, setCloseModal, setIsRegFormOpen} from '../../../store';
 import { useState } from 'react';
+import stInp from '../../../globalStyle/inputs.module.css';
+import buttons from '../../../globalStyle/buttons.module.css';
+import dagger from '../../../Icons/dagger.svg';
 
 
 const Login = () => {
@@ -39,45 +42,54 @@ const Login = () => {
                 errorObj.password = 'Incorrect data, correct example: min-lenght = 8, "Aaaa$123", at least 1 letter, 1 special symbol, 1 number';
                 error = true;
             }
-
         setErrors(errorObj)
         const handleReg = (obj) => {
             dispatch(loginUser(obj));
         }
         if (!error) {
             handleReg({
-                email:email,
-                password:password
+                email: email,
+                password: password
             })
         }
     }
-    
+
     return (
         <div>
             <div className={st.regblock}>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <div onClick={()=>dispatch(setCloseModal(false))}>
-                        X
+                    <div className={st.close} >
+                        <img onClick={() => dispatch(setCloseModal(false))} src={dagger} alt="close" />
                     </div>
-                    <div>
-                        <h3>Login</h3>
+                    <div className={st.titleBlock}>
+                        <p>Log In</p>
                     </div>
-                    <div>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-                        {errors.email && <div>{errors.email}</div>}
+                    <div className={st.blockInputs}>
+                        <div>
+                            <label className={stInp.input}>
+                                <input value={email} onChange={(e) => setEmail(e.target.value)}
+                                    className={errors.email ? stInp.input__field__error : stInp.input__field} type="email" placeholder=" " />
+                                <span className={stInp.input__label}>Email</span>
+                            </label>
+                            {errors.email && <div className={st.errorMessage}>{errors.email}</div>}
+                        </div>
+                        <div className={st.input}>
+                            <label className={stInp.input}>
+                                <input value={password} onChange={(e) => setPassword(e.target.value)}
+                                    className={errors.password ? stInp.input__field__error : stInp.input__field} type="password" placeholder=" " />
+                                <span className={stInp.input__label}>Password</span>
+                            </label>
+                            {errors.password && <div className={st.errorMessage}>{errors.password}</div>}
+                        </div>
                     </div>
-                    <div>
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-                        {errors.password && <div>{errors.password}</div>}
-                    </div>
-                    <div>
-                        <button type="submit">Login</button>
+                    <div className={st.buttonBlock}>
+                        <button className={buttons.buttonFill} type="submit">Login</button>
                     </div>
                 </form>
             </div>
             <div className={st.regblock1}>
-                <div>
-                    <span>I have no account,</span> <button onClick={() => {
+                <div className={st.textBlock}>
+                    <span>I have no account,</span> <button className={st.textButton} onClick={() => {
                         handleIsRegFormOpen(true);
                     }}>Register now</button>
                 </div>
@@ -85,5 +97,4 @@ const Login = () => {
         </div>
     )
 }
-
 export default Login

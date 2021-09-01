@@ -1,0 +1,33 @@
+.editBlock {
+    background: #f8f8f8;
+    height: 100%;
+}
+.mainContent {
+    background-color: white;
+    height: 1200px;
+    margin-left: 18%;
+    margin-right: 18%;
+}
+.userInfoBlock {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+}
+.input{
+    width: 380px;
+    margin-top: 20px;
+}
+.text {
+    margin-left: 25%;
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 40px;
+}
+.buttons{
+    margin-top: 30px;
+}
+.errorMessage{
+    color: red;
+}

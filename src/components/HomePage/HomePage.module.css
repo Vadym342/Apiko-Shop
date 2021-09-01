@@ -1,43 +1,78 @@
-.mainContent{
+.mainContent {
     padding-top: 20px;
-    height: 928px;
-    background: #E5E5E5;
+    height: 100%;
+    background: #e5e5e5;
 }
-.blur{
+.blur {
     height: 928px;
     padding-top: 20px;
     background: rgba(0, 0, 0, 0.6);
     filter: blur(4px);
     -webkit-filter: blur(3px);
 }
-.blockCategory{
+.blockCategory {
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     height: 61px;
-    background: #FFFFFF;
+    background: #ffffff;
     margin-right: 21.63%;
     margin-left: 21.63%;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
 }
 .cardList {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     margin-right: 21%;
     margin-left: 21%;
 }
-.inputSearch{
+.inputSearch {
+    background: #f9fafb;
+    border: 1px solid #DEDEE0;
+    border-radius: 5px;
+    height: 35px;
+    color: #707070;
     width: 290px;
 }
-.selectCategory{
+.selectCategory {
+    background: #f9fafb;
+    border: 1px solid #DEDEE0;
+    border-radius: 5px;
+    height: 35px;
     width: 290px;
+    color: #707070;
 }
-.selectSort{
+.selectSort {
+    background: #f9fafb;
+    border: 1px solid #DEDEE0;
+    color: #707070;
+    border-radius: 5px;
+    height: 35px;
     width: 180px;
 }
-.paginationButton{
+.paginationButton {
     margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+.inputContainer {
+    position: relative;
+}
+
+.inputContainer > img {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.inputContainer > input {
+    padding-left: 40px;
+}
+.inputContainer>select{
+    padding-left: 30px;
 }

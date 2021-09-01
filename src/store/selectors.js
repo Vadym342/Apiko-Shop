@@ -17,4 +17,6 @@ export const notificationBoldMessageSelector = state => state.notificationBoldMe
 export const notificationMessageSelector = state => state.notificationMessage;
 export const cartBubbleSelector = state => state.cartBubble;
 export const orderListSelector = state => state.orderList;
-export const completedOrderArraySelector = state => state.completedOrderArray
+export const completedOrderArraySelector = state => state.completedOrderArray;
+export const offsetSelector = state => state.offset;
+export const orderHistorySelector = state => state.orderHistory;

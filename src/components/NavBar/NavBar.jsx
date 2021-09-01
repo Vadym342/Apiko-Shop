@@ -10,14 +10,19 @@ import Login from '../Authorization/Login/Login';
 import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModalSelector, isLoginFormOpenSelector, isRegFormOpenSelector, setIsLoginFormOpen, setIsRegFormOpen, setCloseModal, userSelector, globalErrorSelector, isGuestPopUpSelector, setIsGuestPopUp, cartBubbleSelector } from '../../store';
+import {
+    closeModalSelector, isLoginFormOpenSelector,
+    isRegFormOpenSelector, setIsLoginFormOpen, setIsRegFormOpen,
+    setCloseModal, userSelector, isGuestPopUpSelector,
+    setIsGuestPopUp, cartBubbleSelector, getUser
+} from '../../store';
 import Ellipse from '../../Icons/Ellipse.svg';
 import ProfilePopUp from './ProfilePopUp/ProfilePopUp';
 import { Link, useHistory } from 'react-router-dom';
 import GuestPopUp from '../Authorization/GuestPopUp/GuestPopUp';
 
+
 const Navbar = () => {
-    //! Винести в окремий файл!!!!!!!!!!!!! з reg i log
     const dispatch = useDispatch();
     let history = useHistory();
 
@@ -27,6 +32,7 @@ const Navbar = () => {
     const user = useSelector(userSelector);
     const isGuestPopUp = useSelector(isGuestPopUpSelector);
     const cartBubble = useSelector(cartBubbleSelector);
+    
     const handleIsRegFormOpen = (bool) => {
         dispatch(setCloseModal(true));
         dispatch(setIsRegFormOpen(bool));
@@ -71,7 +77,7 @@ const Navbar = () => {
                     }
                 </div>
                 {
-                    !user  ?
+                    !user ?
                         <div className={st.nav3}>
                             <div className={st.regBtn}>
                                 <button className={st.authBtn}

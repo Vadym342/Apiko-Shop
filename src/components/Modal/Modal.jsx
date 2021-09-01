@@ -1,5 +1,5 @@
-import ReactDOM from "react-dom";
-import Loader from "../Loader/Loader";
+import ReactDOM from 'react-dom';
+
 
 const Modal = (props) => {
     return props.isOpen && ReactDOM.createPortal(

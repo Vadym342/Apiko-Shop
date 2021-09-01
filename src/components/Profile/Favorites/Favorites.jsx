@@ -17,12 +17,12 @@ const Favorites = () => {
         dispatch(getFavoriteList());
     }
     useEffect(() => {
-            handleFavoriteList()
+        handleFavoriteList()
     }, [favoriteList]);
 
     return (
-        <div>
-            <div>
+        <div className={st.editBlock}>
+            <div className={st.mainContent}>
                 <div>
                     <Profile />
                 </div>

@@ -41,15 +41,18 @@
     margin-top: 11px;
     margin-left: 16px;
     color: #373738;
-    text-decoration: 'none'
+}
+.settingsLink {
+    color: inherit;
+    text-decoration: inherit;
 }
 .h3 {
     font-weight: 400;
     font-size: 14px;
     line-height: 26px;
 }
-.logout{
+.logout {
     margin-top: 14px;
     margin-left: 16px;
-    color: #F44336;
+    color: #f44336;
 }

@@ -1,19 +1,25 @@
 .img {
+    padding: 3px;
     height: 150px;
-    width: 200px;
-    /* transition: 1s; */
+    width: 180px;
+    filter: brightness(0.95);
+    object-fit: contain;
 }
-/* .img:hover {
+.card:hover {
     transform: scale(1.1);
-} */
-.titleBlock{
+}
+.titleBlock {
+    margin-left: 5px;
+    margin-right: 5px;
     height: 55px;
 }
-.priceBlock{
+.priceBlock {
     display: flex;
     justify-content: space-between;
     flex-flow: row nowrap;
     height: 30px;
+    margin-left: 5px;
+    padding-bottom: 5px;
 }
 .buttons {
     position: relative;
@@ -25,19 +31,26 @@
 }
 .title {
     font-weight: 400;
+    font-size: 15px;
 }
 
 .card {
+    transition: 1s;
     margin: 9px;
     margin-top: 20px;
-    height: 220px;
+    height: 245px;
     width: 200px;
+    background-color: white;
 }
 .button {
     width: 200px;
 }
 .cardText {
     color: white;
+}
+.priceText{
+    font-weight: 600;
+    font-size: 18px;
 }
 .buttonHeart {
     border: none;
@@ -47,7 +60,12 @@
     height: 25px;
     text-align: center;
     color: black;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.163407);
+    margin-right: 10px;
 }
 .heartSt {
     color: red;
+}
+.posButton{
+    margin-left: 170px;
 }

@@ -7,5 +7,26 @@
     background: #ffffff;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    height: 290px;
     z-index: 10;
+}
+.close {
+    margin-top: 20px;
+    margin-right: 20px;
+    float: right;
+}
+.blockButtons{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 13%;
+    padding-right: 13%;
+}
+.title{
+    font-size: 20px;
+    text-align: center;
+}
+.button{
+    margin-top: 10px;
 }

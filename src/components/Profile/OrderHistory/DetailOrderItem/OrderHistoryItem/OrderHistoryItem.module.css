@@ -1,3 +1,19 @@
+.pos {
+    position: absolute;
+    top: 100px;
+    right: 17%;
+    left: 18%;
+    width: 64%;
+    height: 75%;
+    background-color: white;
+    z-index: 5;
+}
+.itemsBlock {
+    margin-left: 100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 400px;
+}
 .itemImg {
     margin-left: 20px;
     margin-top: 18px;
@@ -8,12 +24,13 @@
 }
 .flexContainer {
     height: 130px;
-    width: 100%;
+    width: 90%;
+    margin-left: 50px;
     margin-top: 20px;
     border: 1px solid #eceef0;
     box-sizing: border-box;
     box-shadow: 0px 4px 15px rgba(83, 83, 83, 0.053);
-    border-radius: 4px; 
+    border-radius: 4px;
     display: flex;
     flex-flow: row nowrap;
 }
@@ -34,10 +51,10 @@
     text-align: center;
     flex-grow: 1;
 }
-.priceBlock{
+.priceBlock {
     margin-top: 50%;
 }
-.titleBlock{
+.titleBlock {
     text-align: center;
     margin-top: 25px;
     font-size: 14px;
@@ -50,7 +67,6 @@
     border-radius: 50%;
     color: #707070;
     text-align: center;
-    background-image: url("../../../Icons/buttonsCount.svg");
 }
 .buttonsBlock {
     margin-top: 15px;
@@ -58,10 +74,46 @@
     margin-left: 20%;
     flex-direction: row;
 }
-.countNum{
+.countNum {
     margin-left: 10px;
     margin-right: 10px;
+    display: flex;
+    flex-direction: row;
 }
-.dumpIcon{
+.textQuantity{
+    color: #707070;
+}
+.numQuant{
+    margin-left: 20px;
+}
+.dumpIcon {
     margin-right: 20px;
+}
+.mainTxt{
+    text-align: center;
+    margin-left: 150px;
+    font-weight: 500;
+    font-size: 24px;
+    color: #101010;
+}
+.close {
+    margin-left: 100px;
+    margin-right: 20px;
+    float: right;
+}
+.dateItems{
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
+}
+.spanText{
+    font-weight: bold;
+    margin-left: 15px;
+}
+.blockDate{
+    margin-top: 20px;
+    margin-left: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

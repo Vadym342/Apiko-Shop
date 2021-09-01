@@ -1,6 +1,32 @@
-
-.blockLink{
+.blockLink {
+    padding-top: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-direction: row;
+}
+.userPhoto {
+    padding-top: 40px;
+    margin-left: 47%;
+}
+.userName {
+    margin-top: 15px;
+}
+.linkItem {
+    text-align: center;
+    width: 163px;
+    height: 71px;
+    background-color: white;
+    border: 1px solid #dedee0;
+    color: inherit;
+    text-decoration: inherit;
+}
+.routeBlock {
+    width: 163px;
+    height: 81px;
+    text-align: center;
+    background: url("../../Icons/profileRoute.svg") no-repeat center;
+    color:white;
+}
+.linkText{
+    padding-top: 25px;
 }

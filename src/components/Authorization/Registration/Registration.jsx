@@ -1,56 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import st from './Registration.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { globalErrorSelector, registrationUser, setCloseModal, setIsRegFormOpen } from '../../../store';
 import { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import stInp from '../../../globalStyle/inputs.module.css';
+import buttons from '../../../globalStyle/buttons.module.css';
+import dagger from '../../../Icons/dagger.svg';
 
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    margin: {
-        margin: theme.spacing(0, 0, 2),
-    },
-    height: {
-        height: '50px'
-    },
-    withoutLabel: {
-        marginTop: theme.spacing(3),
-    },
-    textField: {
-        width: '25ch',
-    },
-}));
 
 const Registration = (props) => {
-    const classes = useStyles();
-    const [values, setValues] = React.useState({
-        amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
-    });
-
-    const handleChange = (prop) => (event) => {
-        setValues((prevState)=>({ ...prevState, [prop]: event.target.value }));
-    };
-    const handleClickShowPassword = () => {
-        setValues({ ...values, showPassword: !values.showPassword });
-    };
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
     const dispatch = useDispatch();
 
     const handleIsRegFormOpen = (bool) => {
@@ -96,7 +54,7 @@ const Registration = (props) => {
             error = true;
         } else
             if (!passwordRegex.test(password)) {
-                errorObj.password = 'Incorrect data, correct example: min-lenght = 8, "Aaaa$123", at least 1 letter, 1 special symbol, 1 number';
+                errorObj.password = 'Incorrect data, correct example: min-lenght = 8, at least 1 letter, 1 special symbol, 1 number';
                 error = true;
             }
         if (!phone) {
@@ -118,80 +76,62 @@ const Registration = (props) => {
                 password: password,
                 phone: phone
             });
-            console.log('form submit');
         }
     }
-
     return (
         <div>
             <div className={st.regblock}>
+                <div className={st.close} >
+                    <img onClick={() => dispatch(setCloseModal(false))} src={dagger} alt="close" />
+                </div>
+                <div className={st.titleBlock}>
+                    <p>Registration</p>
+                </div>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <div onClick={() => dispatch(setCloseModal(false))}>
-                        X
+                    <div className={st.blockInputs}>
+                        <div>
+                            <label className={stInp.input}>
+                                <input value={name} onChange={(e) => setName(e.target.value)}
+                                    className={errors.name ? stInp.input__field__error : stInp.input__field} type="text" placeholder=" " />
+                                <span className={stInp.input__label}>Full Name</span>
+                            </label>
+                            {errors.name && <div className={st.errorMessage}>{errors.name}</div>}
+                        </div>
+                        <div className={st.input}>
+                            <label className={stInp.input}>
+                                <input value={email} onChange={(e) => setEmail(e.target.value)}
+                                    className={errors.name ? stInp.input__field__error : stInp.input__field} type="text" placeholder=" " />
+                                <span className={stInp.input__label}>Email</span>
+                            </label>
+                            {globalError !== "" ? <div className={st.errorMessage}>{globalError}</div> : ""}
+                            {errors.email && <div className={st.errorMessage}>{errors.email}</div>}
+                        </div>
+                        <div className={st.input}>
+                            <label className={stInp.input}>
+                                <input value={phone} onChange={(e) => setPhone(e.target.value)}
+                                    className={errors.name ? stInp.input__field__error : stInp.input__field} type="phone" placeholder=" " />
+                                <span className={stInp.input__label}>Phone number</span>
+                            </label>
+                            {errors.phone && <div className={st.errorMessage}>{errors.phone}</div>}
+                        </div>
+                        <div className={st.input}>
+                            <label className={stInp.input}>
+                                <input value={password} onChange={(e) => setPassword(e.target.value)}
+                                    className={errors.name ? stInp.input__field__error : stInp.input__field} type="password" placeholder=" " />
+
+                                <span className={stInp.input__label}>Password</span>
+                            </label>
+                            {errors.password && <div className={st.errorMessage}>{errors.password}</div>}
+                        </div>
                     </div>
-                    <div>
-                        <h3>Registration</h3>
-                    </div>
-                    <div>
-                        <TextField
-                            id="outlined-secondary"
-                            className={classes.margin, classes.height}
-                            label="Full Name"
-                            variant="outlined"
-                            type="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full Name" />
-                        {errors.name && <div>{errors.name}</div>}
-                    </div>
-                    <div>
-                        <TextField
-                            id="outlined-secondary"
-                            label="Email"
-                            className={classes.margin, classes.height}
-                            variant="outlined"
-                            type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-                        {globalError !== "" ? <div>{globalError}</div> : ""}
-                        {errors.email && <div>{errors.email}</div>}
-                    </div>
-                    <div>
-                        <TextField
-                            id="outlined-secondary"
-                            label="Phone"
-                            variant="outlined"
-                            className={classes.margin}
-                            type="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" />
-                        {errors.phone && <div>{errors.phone}</div>}
-                    </div>
-                    <div>
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            color="secondary"
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            labelWidth={70}
-                        />
-                        {errors.password && <div>{errors.password}</div>}
-                    </div>
-                    <div>
-                        <button type="submit">Register</button>
+                    <div className={st.buttonBlock}>
+                        <button className={buttons.buttonFill} type="submit">Register</button>
                     </div>
                 </form>
             </div>
             <div className={st.regblock1}>
-                <div>
-                    <span>I already have an account,</span> <button onClick={() => {
+                <div className={st.textBlock}>
+                    <span>I already have an account,</span> <button className={st.textButton} onClick={() => {
                         handleIsRegFormOpen(false);
                     }}>Log in</button>
                 </div>

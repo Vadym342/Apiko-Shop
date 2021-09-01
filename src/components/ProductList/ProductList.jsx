@@ -1,17 +1,16 @@
 import st from './ProductList.module.css';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { BsHeart } from "@react-icons/all-files/bs/BsHeart";
+import { BsHeart } from '@react-icons/all-files/bs/BsHeart';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFavoriteById, isGuestPopUpSelector, postFavoriteById, setIsGuestPopUp, userSelector } from '../../store';
-import { useEffect } from 'react';
-import GuestPopUp from '../Authorization/GuestPopUp/GuestPopUp';
+
+
 const ProductListRender = (props) => {
     const [toggleHeart, setToggleHeart] = useState(props.favorite);
     const [substr, setSubStr] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(userSelector);
-    const isGuestPopUp = useSelector(isGuestPopUpSelector);
+
     const handleSetFavorite = () => {
         if (user !== null) {
             if (!toggleHeart) {
@@ -30,27 +29,22 @@ const ProductListRender = (props) => {
     return (
         <div className={st.card}>
             <span className={st.buttons} onClick={() => { props.openSingleItem(props.item) }}>
-                {/* <div className={st.block}>
-                    <h3>Сlick to read more</h3>
-                </div> */}
+
                 <img className={st.img} src={props.picture} alt="Shoes" />
             </span>
             <div className={st.titleBlock}>
-                <h4 className={st.title}>{title} {substr ? "..." : ""}</h4>
+                <p className={st.title}>{title} {substr ? "..." : ""}</p>
             </div>
             <div className={st.priceBlock}>
                 <div>
-                    <h4>${props.price}</h4>
+                    <p className={st.priceText}>${props.price}</p>
                 </div>
-                <div className={st.blockHeart}>
-                    <button className={st.buttonHeart} disabled onClick={() => handleSetFavorite()}>
+                <div className={st.blockButton}>
+                    <button className={st.buttonHeart} onClick={() => handleSetFavorite()}>
                         <BsHeart className={st.heartIcon} color={toggleHeart ? "red" : ""} />
                     </button>
                 </div>
             </div>
-            {
-                isGuestPopUp ? <GuestPopUp /> : ""
-            }
         </div>
     );
 }

@@ -2,10 +2,10 @@
     position: absolute;
     left: 35.28%;
     right: 35.21%;
-    top: 20.37%;
+    top: 13.2%;
     bottom: 32.5%;
     width: 425px;
-    height: 44%;
+    height: 68%;
     border-radius: 4px;
     background: #ffffff;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
@@ -14,7 +14,7 @@
 .regblock1 {
     width: 425px;
     height: 6%;
-    margin-top: -15px;
+    margin-top: 110px;
     position: absolute;
     left: 35.21%;
     right: 35.28%;
@@ -23,4 +23,43 @@
     background: #ffffff;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+}
+.errorMessage{
+    color: red;
+    font-weight: 300;
+}
+.close {
+    margin-top: 20px;
+    margin-right: 20px;
+    float: right;
+}
+.titleBlock{
+    font-size: 18px;
+    font-weight: 400;
+    padding-top: 35px;
+    text-align: center;
+}
+.blockInputs{
+    margin-top: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.buttonBlock{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+.input{
+    margin-top: 20px;
+}
+.textBlock{
+    margin-top: 3%;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+}
+.textButton{
+    border: none;
+    color: #FD7114;
+    background-color: white;
 }

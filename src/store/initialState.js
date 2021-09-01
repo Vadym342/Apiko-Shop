@@ -12,15 +12,13 @@ export const initialState = {
     notFoundCategory:false,
     isGuestPopUp:false,
     favoriteList:[],
-    cartArray:[{
-        id:0,
-        count:0,
-        totalPrice:0
-    }],
+    cartArray:[],
     isNotificationPopUp:false,
     notificationBoldMessage:'',
     notificationMessage:'',
     cartBubble:0,
     orderList:[],
-    completedOrderArray:[]
+    completedOrderArray:[],
+    offset:0,
+    orderHistory:[],
 }

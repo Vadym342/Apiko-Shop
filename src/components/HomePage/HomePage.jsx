@@ -1,34 +1,49 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
 import { useEffect, useState, useCallback } from 'react';
-import { categoriesSelector, fetchCategories, fetchProductList, getProductsByCategoryId, isLoaderSelector, isNotificationPopUpSelector, notFoundCategory, notFoundCategorySelector, notFoundSelector, productListSelector, searchItem, setCloseModal, userSelector } from '../../store';
+import {
+    cartArraySelector, cartBubbleSelector, categoriesSelector,
+    fetchCategories, fetchProductList, getProductsByCategoryId, getUser,
+    isGuestPopUpSelector, isLoaderSelector, notFoundCategorySelector, notFoundSelector,
+    offsetSelector, productListSelector, searchItem, 
+    setCartArray, setCartBubble, setOffset, setOrderList, setProductList, userSelector
+} from '../../store';
 import st from './HomePage.module.css'
 import ProductListRender from '../ProductList/ProductList';
 import ProductDesc from '../ProductList/ProductDesc/ProductDesc';
-import { debounce } from "debounce";
+import { debounce } from 'debounce';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
-import NotificationPopUp from '../NotificationPopUp/NotificationPopUp';
 import Pagination from '../Pagination/Pagination';
+import GuestPopUp from '../Authorization/GuestPopUp/GuestPopUp';
+import iconSearch from '../../Icons/iconSearch.svg';
+import iconCategory from '../../Icons/iconCategory.svg';
+import iconSorting from '../../Icons/iconSorting.svg';
+import { useHistory } from 'react-router-dom';
 
 
 const HomePage = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    const user = useSelector(userSelector);
     const productList = useSelector(productListSelector);
     const categories = useSelector(categoriesSelector);
     const [selectedSingleItem, setSelectedSingleItem] = useState(null);
     const debounceOnChange = useCallback(debounce(onChange, 300), []);
     const notFound = useSelector(notFoundSelector);
     const notFoundCategory = useSelector(notFoundCategorySelector);
-    const [selectedCategory, setSelectedCategory] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState(-1);
     const [selectedSort, setSelectedSort] = useState("latest");
-    const [empty, setEmpty] = useState("");
+    const [empty, setEmpty] = useState(false);
     const isLoader = useSelector(isLoaderSelector);
-    const isNotificationPopUp = useSelector(isNotificationPopUpSelector);
-
+    const offset = useSelector(offsetSelector);
+    const isGuestPopUp = useSelector(isGuestPopUpSelector);
+    const cartArray = useSelector(cartArraySelector);
+    const cartBubble = useSelector(cartBubbleSelector);
 
     function onChange(value) {
         if (value === "") {
-            setEmpty("Empty");
+            setEmpty(true);
         } else {
             dispatch(searchItem(value));
         }
@@ -40,27 +55,55 @@ const HomePage = () => {
     const handleFetchCategoties = () => {
         dispatch(fetchCategories());
     }
-    useEffect(() => {
-        handleFetchProductList({ category: selectedCategory, sortBy: selectedSort });
-        handleFetchCategoties();
-    }, [selectedSort, empty])
-
     const handleSelectedCategory = (selectedCategory) => {
+        dispatch(setProductList([]));
         dispatch(getProductsByCategoryId(selectedCategory))
     }
-
+    const handleSetSelectedCategory = (e) => {
+        setSelectedCategory(e.target.value);
+        dispatch(setOffset(0));
+    }
+    // useEffect(() => {
+    //     handleFetchProductList({ category: selectedCategory, sortBy: selectedSort });
+    //     handleFetchCategoties();
+    // }, [selectedSort, empty, offset])
+    // useEffect(()=>{
+    //     sessionStorage.setItem('cartBubble',cartBubble);
+    //     sessionStorage.setItem('cartArray',cartArray);
+    // },[cartArray])
+    useEffect(() => {
+        dispatch(setProductList([]));
+        handleFetchProductList({ category: selectedCategory, sortBy: selectedSort });
+        handleFetchCategoties();
+    }, [user, selectedSort, offset])
     useEffect(() => {
         handleSelectedCategory({ category: selectedCategory, sortBy: selectedSort });
-    }, [selectedCategory, selectedSort])
+    }, [selectedCategory, selectedSort, offset])
 
+    useEffect(() => {
+        // if (sessionStorage.getItem('orderList')) {
+        //     dispatch(setCartArray(JSON.parse(sessionStorage.getItem('cartArray'))))
+        //     dispatch(setCartBubble(JSON.parse(sessionStorage.getItem('cartBubble'))))
+        //     dispatch(setOrderList(JSON.parse(sessionStorage.getItem('orderList'))));
+        // }
+        const headers = {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
+        }
+        dispatch(getUser(headers));
+        history.push('/');
+
+    }, []);
     return (
         <div className={isLoader ? st.blur : st.mainContent}>
             <div className={st.blockCategory}>
-                <div>
+                <div className={st.inputContainer}>
+                    <img src={iconSearch} alt={iconSearch} />
                     <input className={st.inputSearch} placeholder="Search products by name" onChange={e => debounceOnChange(e.target.value)} />
                 </div>
-                <div>
-                    <select className={st.selectCategory} defaultValue="Choose Category" onChange={e => setSelectedCategory(e.target.value)}>
+                <div className={st.inputContainer}>
+                    <img src={iconCategory} alt={iconCategory} />
+                    <select className={st.selectCategory} defaultValue="Choose Category" onChange={e => handleSetSelectedCategory(e)}>
                         <option value="1">All</option>
                         {
                             categories.map(category => (
@@ -69,7 +112,8 @@ const HomePage = () => {
                         }
                     </select>
                 </div>
-                <div>
+                <div className={st.inputContainer}>
+                    <img src={iconSorting} alt={iconSorting} />
                     <select className={st.selectSort} defaultValue="Sorting" onChange={e => setSelectedSort(e.target.value)}>
                         <option disabled hidden>Sorting</option>
                         <option value="popular">Popular</option>
@@ -80,9 +124,9 @@ const HomePage = () => {
             <div className={st.cardList}>
                 {
                     notFound || notFoundCategory ? <NotFoundPage notFound={notFound} notFoundCategory={notFoundCategory} /> :
-                        productList.map(item => (
+                        productList.map((item, index) => (
                             <ProductListRender
-                                key={item.id}
+                                key={index}
                                 selectedSingleItem={selectedSingleItem}
                                 closePopUp={() => setSelectedSingleItem(null)}
                                 openSingleItem={setSelectedSingleItem}
@@ -103,8 +147,7 @@ const HomePage = () => {
                 )
             }
             {
-                isNotificationPopUp ? <NotificationPopUp
-                /> : ""
+                isGuestPopUp ? <GuestPopUp /> : ""
             }
         </div>
     );

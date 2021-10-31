@@ -10,8 +10,8 @@ import dagger from '../../../Icons/dagger.svg';
 const Login = () => {
     const dispatch = useDispatch();
 
-    const handleIsRegFormOpen = (bool) => {
-        dispatch(setIsRegFormOpen(bool));
+    const handleIsRegFormOpen = (isRegFormOpen) => {
+        dispatch(setIsRegFormOpen(isRegFormOpen));
     }
 
     const [email, setEmail] = useState('');

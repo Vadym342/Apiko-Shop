@@ -24,7 +24,7 @@ import GuestPopUp from '../Authorization/GuestPopUp/GuestPopUp';
 
 const Navbar = () => {
     const dispatch = useDispatch();
-    let history = useHistory();
+    const history = useHistory();
 
     const isRegFormOpen = useSelector(isRegFormOpenSelector);
     const isLoginFormOpen = useSelector(isLoginFormOpenSelector);
@@ -43,7 +43,7 @@ const Navbar = () => {
     }
 
     const handleFavorite = () => {
-        if (user === null) {
+        if (!user) {
             dispatch(setIsGuestPopUp(true));
         }
         else {
@@ -52,7 +52,7 @@ const Navbar = () => {
     }
 
     const handleCart = () => {
-        if (user === null) {
+        if (!user) {
             dispatch(setIsGuestPopUp(true));
         } else {
             history.push("/cart");

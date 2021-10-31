@@ -10,7 +10,7 @@ const Loader = () => {
                 isLoader ? <div> <div className={st.ldSpinner}><div></div><div></div><div>
                 </div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                     <div className={st.text}>
-                        <h3 >
+                        <h3>
                             Searching...
                         </h3>
                     </div>

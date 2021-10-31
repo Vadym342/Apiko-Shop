@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
 import { useEffect, useState, useCallback } from 'react';
 import {
-    cartArraySelector, cartBubbleSelector, categoriesSelector,
+    categoriesSelector,
     fetchCategories, fetchProductList, getProductsByCategoryId, getUser,
     isGuestPopUpSelector, isLoaderSelector, notFoundCategorySelector, notFoundSelector,
-    offsetSelector, productListSelector, searchItem, 
-    setCartArray, setCartBubble, setOffset, setOrderList, setProductList, userSelector
+    offsetSelector, productListSelector, searchItem,
+    setOffset, setProductList, userSelector
 } from '../../store';
 import st from './HomePage.module.css'
 import ProductListRender from '../ProductList/ProductList';
@@ -38,9 +38,7 @@ const HomePage = () => {
     const isLoader = useSelector(isLoaderSelector);
     const offset = useSelector(offsetSelector);
     const isGuestPopUp = useSelector(isGuestPopUpSelector);
-    const cartArray = useSelector(cartArraySelector);
-    const cartBubble = useSelector(cartBubbleSelector);
-
+   
     function onChange(value) {
         if (value === "") {
             setEmpty(true);
@@ -48,7 +46,6 @@ const HomePage = () => {
             dispatch(searchItem(value));
         }
     }
-
     const handleFetchProductList = (selectedSort) => {
         dispatch(fetchProductList(selectedSort));
     }
@@ -63,14 +60,6 @@ const HomePage = () => {
         setSelectedCategory(e.target.value);
         dispatch(setOffset(0));
     }
-    // useEffect(() => {
-    //     handleFetchProductList({ category: selectedCategory, sortBy: selectedSort });
-    //     handleFetchCategoties();
-    // }, [selectedSort, empty, offset])
-    // useEffect(()=>{
-    //     sessionStorage.setItem('cartBubble',cartBubble);
-    //     sessionStorage.setItem('cartArray',cartArray);
-    // },[cartArray])
     useEffect(() => {
         dispatch(setProductList([]));
         handleFetchProductList({ category: selectedCategory, sortBy: selectedSort });
@@ -81,21 +70,16 @@ const HomePage = () => {
     }, [selectedCategory, selectedSort, offset])
 
     useEffect(() => {
-        // if (sessionStorage.getItem('orderList')) {
-        //     dispatch(setCartArray(JSON.parse(sessionStorage.getItem('cartArray'))))
-        //     dispatch(setCartBubble(JSON.parse(sessionStorage.getItem('cartBubble'))))
-        //     dispatch(setOrderList(JSON.parse(sessionStorage.getItem('orderList'))));
-        // }
-        const headers = {
-            'accept': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
-        }
-        dispatch(getUser(headers));
+        dispatch(getUser());
         history.push('/');
 
     }, []);
+    
     return (
         <div className={isLoader ? st.blur : st.mainContent}>
+        {
+      
+        }
             <div className={st.blockCategory}>
                 <div className={st.inputContainer}>
                     <img src={iconSearch} alt={iconSearch} />
@@ -124,9 +108,9 @@ const HomePage = () => {
             <div className={st.cardList}>
                 {
                     notFound || notFoundCategory ? <NotFoundPage notFound={notFound} notFoundCategory={notFoundCategory} /> :
-                        productList.map((item, index) => (
+                        productList.map(item => (
                             <ProductListRender
-                                key={index}
+                                key={'_' + Math.random().toString(36).substr(2, 9)}
                                 selectedSingleItem={selectedSingleItem}
                                 closePopUp={() => setSelectedSingleItem(null)}
                                 openSingleItem={setSelectedSingleItem}
@@ -146,9 +130,7 @@ const HomePage = () => {
                     />
                 )
             }
-            {
-                isGuestPopUp ? <GuestPopUp /> : ""
-            }
+            {!!isGuestPopUp && <GuestPopUp />}
         </div>
     );
 }

@@ -12,15 +12,15 @@ import buttonSt from '../../../globalStyle/buttons.module.css';
 const GuestPopUp = () => {
     const dispatch = useDispatch();
     const isOpen = useSelector(closeModalSelector);
-    const handleLogIn = (bool) => {
+    const handleLogIn = (isRegFormOpen) => {
         dispatch(setIsGuestPopUp(false))
         dispatch(setCloseModal(true));
-        dispatch(setIsRegFormOpen(bool));
+        dispatch(setIsRegFormOpen(isRegFormOpen));
     }
-    const handleRegistration = (bool) => {
+    const handleRegistration = (isRegFormOpen) => {
         dispatch(setIsGuestPopUp(false))
         dispatch(setCloseModal(true));
-        dispatch(setIsRegFormOpen(bool));
+        dispatch(setIsRegFormOpen(isRegFormOpen));
     }
     const isRegFormOpen = useSelector(isRegFormOpenSelector);
     return (

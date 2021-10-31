@@ -84,14 +84,14 @@ const Order = () => {
                 error = true;
             }
         setErrors(errorObj);
-        const handleConfirmOrder = (obj) => {
-            setCount(0);
-            setTotalPrice(0);
-            dispatch(setCartBubble(0));
-            dispatch(setIsNotificationPopUp(true));
-            dispatch(setNotificationBoldMessage("order"));
-            dispatch(setNotificationMessage("has been successfully processed"));
+        const handleConfirmOrder = () => {
             if (OrderList.length > 0) {
+                setCount(0);
+                setTotalPrice(0);
+                dispatch(setCartBubble(0));
+                dispatch(setIsNotificationPopUp(true));
+                dispatch(setNotificationBoldMessage("order"));
+                dispatch(setNotificationMessage("has been successfully processed"));
                 OrderList.forEach(el => {
                     for (let item in cartArray) {
                         if (cartArray[item].id === el.id) {
@@ -119,13 +119,6 @@ const Order = () => {
             handleConfirmOrder();
         }
     }
-    useEffect(() => {
-        // if (sessionStorage.getItem('orderList')) {
-        //     dispatch(setCartArray(JSON.parse(sessionStorage.getItem('cartArray'))))
-        //     dispatch(setCartBubble(JSON.parse(sessionStorage.getItem('cartBubble'))))
-        //     dispatch(setOrderList(JSON.parse(sessionStorage.getItem('orderList'))));
-        // }
-    }, [])
     useEffect(() => {
         handleFetchOrderProducts();
         handleCountry();

@@ -11,8 +11,8 @@ import dagger from '../../../Icons/dagger.svg';
 const Registration = (props) => {
     const dispatch = useDispatch();
 
-    const handleIsRegFormOpen = (bool) => {
-        dispatch(setIsRegFormOpen(bool));
+    const handleIsRegFormOpen = (isRegFormOpen) => {
+        dispatch(setIsRegFormOpen(isRegFormOpen));
     }
     const globalError = useSelector(globalErrorSelector);
     const [name, setName] = useState('');

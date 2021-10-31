@@ -12,10 +12,11 @@ import ProtectedRoute from './components/ProtectedRoute';
 import NotificationPopUp from './components/NotificationPopUp/NotificationPopUp';
 import { useSelector } from 'react-redux';
 import { isNotificationPopUpSelector } from './store';
-
+import { useEffect, useState, useCallback } from 'react';
 
 function App() {
   const isNotificationPopUp = useSelector(isNotificationPopUpSelector);
+
   return (
     <div>
       <Navbar />

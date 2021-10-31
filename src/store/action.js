@@ -121,12 +121,16 @@ export const loginUser = (payload) => (dispatch, getState) => {
 }
 
 export const getUser = (payload) => (dispatch) => {
+    const headers = {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
+    }
     const fetchData = async () => {
         try {
             const res = await fetch(`/api/account`,
                 {
                     method: 'GET',
-                    headers: payload
+                    headers: headers
                 });
             const data = await res.json();
             if (res.status === 200) {
@@ -410,13 +414,10 @@ export const getProductsByArray = (payload) => (dispatch, getState) => {
                 if (res.status === 200) {
                     sessionStorage.setItem('cartBubble', JSON.stringify(cartBubble));
                     sessionStorage.setItem('cartArray', JSON.stringify(cartArray));
-                    sessionStorage.setItem('orderList',JSON.stringify(data));
+                    sessionStorage.setItem('orderList', JSON.stringify(data));
                     dispatch(setOrderList(data));
                 }
             }
-            //  else {
-            //     dispatch(setOrderList([]));
-            // }
         } catch (err) {
             console.log("Error", err);
         }

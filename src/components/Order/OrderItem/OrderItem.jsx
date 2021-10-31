@@ -17,18 +17,16 @@ const OrderItem = (props) => {
     const completedOrdereArray = useSelector(completedOrderArraySelector);
 
     const handleInitCount = () => {
-        for (let item in cartArray) {
-            if (cartArray[item].id === props.item.id) {
-                return cartArray[item].count;
-            }
-        }
+        const cartItem = cartArray.find(item => item.id === props.item.id);
+        return cartItem ? cartItem.count : 0;
     }
     const handleInitPrice = () => {
-        for (let item in cartArray) {
-            if (cartArray[item].id === props.item.id) {
-                return cartArray[item].totalPrice;
+        const cartItem = cartArray.find(item => {
+            if (item.id === props.item.id) {
+                return item.totalPrice;
             }
-        }
+        });
+        return cartItem ? cartItem.totalPrice : 0;
     }
     const [count, setCount] = useState(handleInitCount());
     const [price, setPrice] = useState(handleInitPrice());
@@ -48,25 +46,19 @@ const OrderItem = (props) => {
         }
     }
     const deleteOrderItem = () => {
-        props.setTotalPrice(props.totalPrice-price);
-        props.setCount(props.count-1);
+        props.setTotalPrice(props.totalPrice - price);
+        props.setCount(props.count - 1);
         dispatch(setCartBubble(cartBubble - 1));
         dispatch(deleteCartarray(props.item.id));
     }
     useEffect(() => {
-        for (let item in cartArray) {
-            if (cartArray[item].id === props.item.id) {
-                for (let i = 0; i < completedOrdereArray.length; i++) {
-                    if (completedOrdereArray[i].product.id === props.item.id) {
-                        dispatch(deleteCompletedOrderArray(completedOrdereArray[i].product.id))
-                    }
-                }
-                dispatch(setCompletedOrderArray({
-                    product: props.item,
-                    quantity: count,
-                    orderedPrice: price,
-                }))
-            }
+        const order = completedOrdereArray.find(item => item.product.id === props.item.id);
+        if (order) {
+            dispatch(setCompletedOrderArray({
+                product: props.item,
+                quantity: count,
+                orderedPrice: price,
+            }))
         }
     }, [count])
 
